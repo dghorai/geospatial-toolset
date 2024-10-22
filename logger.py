@@ -21,7 +21,7 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout)
     ]
 )
-logger = logging.getLogger("PyGeoMLLogger")
+logger = logging.getLogger("GeospatialLogger")
 
 
 class CustomException(Exception):

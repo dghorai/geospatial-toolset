@@ -1,0 +1,41 @@
+- [Data Science Machine Learning Project with Source Code](https://github.com/durgeshsamariya/Data-Science-Machine-Learning-Project-with-Source-Code)
+- [Data Science Projects](https://github.com/SUKHMAN-SINGH-1612/Data-Science-Projects)
+- [Data Science Projects](https://github.com/yusufcinarci/Data-Science-Projects)
+- [500 AI Machine learning Deep learning Computer vision NLP Projects with code](https://github.com/ashishpatel26/500-AI-Machine-learning-Deep-learning-Computer-vision-NLP-Projects-with-code)
+- [Free Stock Photos](https://freestocks.org/)
+- [12 Data Science Projects for Beginners and Experts](https://builtin.com/data-science/data-science-projects)
+- [Auto generate README.md file](https://rahuldkjain.github.io/gh-profile-readme-generator/)
+- [README.md example](https://github.com/giswqs/giswqs/blob/master/README.md)
+- [Get Bootstrap](https://getbootstrap.com/docs/5.3/examples/)
+- [Open source photos](https://unsplash.com/s/photos/data-science?license=free)
+- [markus-spiske-hvSr_CVecVI-unsplash](https://unsplash.com/photos/computer-coding-screengrab-hvSr_CVecVI)
+- [fabio-oyXis2kALVg-unsplash](https://unsplash.com/photos/geometric-shape-digital-wallpaper-oyXis2kALVg)
+- [markus-spiske-iar-afB0QQw-unsplash](https://unsplash.com/photos/matrix-movie-still-iar-afB0QQw)
+- [pietro-jeng-n6B49lTx7NM-unsplash](https://unsplash.com/photos/green-and-red-light-wallpaper-n6B49lTx7NM)
+- [hans-reniers-lQGJCMY5qcM-unsplash](https://unsplash.com/photos/three-clear-beakers-placed-on-tabletop-lQGJCMY5qcM)
+- [ML model from scratch](https://www.linkedin.com/pulse/building-machine-learning-model-from-scratch-luis-soares-m-sc-/)
+
+- http://help.arcgis.com/en/arcgisdesktop/10.0/help/index.html#//000v0000002p000000
+- http://resources.arcgis.com/en/help/main/10.1/index.html#//002z0000001t000000
+- http://gis.stackexchange.com/questions/71645/a-tool-or-way-to-extend-line-by-specified-distance
+- https://stackoverflow.com/questions/33311616/find-coordinate-of-closest-point-on-polygon-shapely
+- https://automating-gis-processes.github.io/2017/lessons/L3/nearest-neighbour.html
+- https://gis.stackexchange.com/questions/170264/python-point-in-polygon-boundary-and-vertex-check-ray-casting
+- http://pro.arcgis.com/en/pro-app/arcpy/get-started/reading-geometries.htm
+- https://stackoverflow.com/questions/34752064/create-new-shapefile-in-arcmap-using-python
+- http://pro.arcgis.com/en/pro-app/arcpy/get-started/writing-geometries.htm
+- http://anothergisblog.blogspot.com/2011/07/creating-extent-polygons-using-arcpy.html
+- http://gis.stackexchange.com/questions/152250/how-do-i-compare-two-features-to-test-if-they-are-identical
+- http://gis.stackexchange.com/questions/26369/get-all-the-points-of-a-polyline
+- http://gis.stackexchange.com/questions/16122/how-to-create-a-shapefile-in-arcgis-10-using-arcpy
+- http://gis.stackexchange.com/questions/64451/add-value-in-attribute-field-using-arcpy
+
+- https://dev.to/chhajedji/transfer-data-between-your-phone-and-computer-without-any-cable-28m5
+- https://github.com/brandon-wallace/serve_files
+- https://gis.stackexchange.com/questions/114067/list-all-feature-datasets-feature-classes-from-a-single-geodatabase-into-csv
+- https://stackoverflow.com/questions/2693820/extract-images-from-pdf-without-resampling-in-python
+- http://stackoverflow.com/questions/12960556/converting-xlsx-to-xls-in-python-with-win32com-client-module
+- http://www.ncdc.noaa.gov/ibtracs/index.php?name=ibtracs-data
+- https://gis.stackexchange.com/questions/296943/rasterizing-vector-shapefiles-using-multiple-burn-in-values
+- https://stackoverflow.com/questions/59821554/converting-vector-shp-to-raster-tiff-using-python-gdal-library
+- https://gis.stackexchange.com/questions/136059/convert-vector-point-shape-to-raster-tif-using-python-gdal-lib-in-qgis

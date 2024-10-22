@@ -1,9 +1,0 @@
-# https://dev.to/chhajedji/transfer-data-between-your-phone-and-computer-without-any-cable-28m5
-# https://github.com/brandon-wallace/serve_files
-# https://gis.stackexchange.com/questions/114067/list-all-feature-datasets-feature-classes-from-a-single-geodatabase-into-csv
-# https://stackoverflow.com/questions/2693820/extract-images-from-pdf-without-resampling-in-python
-# http://stackoverflow.com/questions/12960556/converting-xlsx-to-xls-in-python-with-win32com-client-module
-# http://www.ncdc.noaa.gov/ibtracs/index.php?name=ibtracs-data
-# https://gis.stackexchange.com/questions/296943/rasterizing-vector-shapefiles-using-multiple-burn-in-values
-# https://stackoverflow.com/questions/59821554/converting-vector-shp-to-raster-tiff-using-python-gdal-library
-# https://gis.stackexchange.com/questions/136059/convert-vector-point-shape-to-raster-tif-using-python-gdal-lib-in-qgis

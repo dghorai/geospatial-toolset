@@ -108,24 +108,3 @@ def encode_image_into_base64(croppedImagePath):
     with open(croppedImagePath, "rb") as f:
         return base64.b64encode(f.read())
     return
-    
-
-def evaluate_model(X_train, y_train, X_test, y_test, models, ml_type=None):
-    try:
-        report = {}
-        if ml_type == 'regression':
-            for i in range(len(models)):
-                model = list(models.values())[i]
-                # Train model
-                model.fit(X_train, y_train)
-                # Predict Testing data
-                y_test_pred = model.predict(X_test)
-                # Get R2 scores for train and test data
-                test_model_score = r2_score(y_test, y_test_pred)
-                report[list(models.keys())[i]] = test_model_score
-        elif ml_type == 'classification':
-            pass
-        return report
-    except Exception as e:
-        logging.info('Exception occured during model training')
-        raise CustomException(e, sys)

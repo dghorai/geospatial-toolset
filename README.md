@@ -50,9 +50,7 @@ We welcome contributions! If you wish to contribute to this repository, kindly a
 - Finally, submit a pull request to the main repository
 
 
-## Geospatial Analysis using Python and GIS Toolset
-
-### Contents:
+# Geospatial Analysis using Python and GIS Toolset
 
 Chapter 1. Getting Started
 1. Introduction

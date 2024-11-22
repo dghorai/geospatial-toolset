@@ -13,6 +13,7 @@ sys.path.append('src')
 
 from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS, cross_origin
+from pathlib import Path
 
 from ml_models.prediction_pipeline import CustomData, PredictPipeline
 from classification.xgboost.pipeline.prediction_pipeline import CustomData, PredictPipeline
@@ -30,6 +31,9 @@ os.putenv('LC_ALL', 'en_US.UTF-8')
 
 # config
 DEG_TO_KM = 111.0  # https://education.nationalgeographic.org/resource/latitude/
+PRJ_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_FILE_PATH = Path("config.yaml")
+PARAMS_FILE_PATH = Path("params.yaml")
 
 
 # class ClientApp:

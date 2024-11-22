@@ -50,8 +50,7 @@ We welcome contributions! If you wish to contribute to this repository, kindly a
 - Finally, submit a pull request to the main repository
 
 
-# eBook:
-## Geospatial Analysis using Python and Geospatial Toolset
+## Geospatial Analysis using Python and GIS Toolset
 
 ### Contents:
 

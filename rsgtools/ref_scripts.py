@@ -7,7 +7,7 @@ from osgeo import ogr, gdal
 from pyproj import Proj
 from scipy.spatial import ConvexHull
 from scipy.linalg import solve
-from consts import DEG_TO_KM
+from app import DEG_TO_KM
 from rsgtools.utils import (
     dist_calc,
     flip_line,

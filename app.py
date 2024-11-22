@@ -28,6 +28,9 @@ CORS(app)
 os.putenv('LANG', 'en_US.UTF-8')
 os.putenv('LC_ALL', 'en_US.UTF-8')
 
+# config
+DEG_TO_KM = 111.0  # https://education.nationalgeographic.org/resource/latitude/
+
 
 # class ClientApp:
 #     def __init__(self):

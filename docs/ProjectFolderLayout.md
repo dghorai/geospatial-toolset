@@ -40,3 +40,5 @@ References
 - [src-layout-vs-flat-layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/)
 - [a-practical-guide-to-python-project-structure-and-packaging](https://medium.com/mlearning-ai/a-practical-guide-to-python-project-structure-and-packaging-90c7f7a04f95)
 - [package_discovery](https://setuptools.pypa.io/en/latest/userguide/package_discovery.html)
+- [Project layouts](https://realpython.com/python-application-layouts/)
+- [Python project structure](https://github.com/yngvem/python-project-structure)

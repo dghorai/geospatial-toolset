@@ -26,7 +26,7 @@ from fiona.crs import from_epsg
 from ensure import ensure_annotations
 # from typing import Any
 from rsgtools import CustomException, logger
-from consts import DEG_TO_KM
+from app import DEG_TO_KM
 
 # Set GDAL/Geopandas Configuration
 gdal.SetConfigOption('SHAPE_RESTORE_SHX', 'YES')

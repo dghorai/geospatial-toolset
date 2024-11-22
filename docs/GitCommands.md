@@ -1,9 +1,4 @@
-# Notes:
-
-- Convert ipynb to py file in vscode: ctrl+shift+p --> type Export --> select Export to Python Script
-- Project layouts: https://realpython.com/python-application-layouts/
-- Python project structure: https://github.com/yngvem/python-project-structure
-- ## Git Commands:
+## Git Commands:
   - Run this command to see what branch you're on: `git status`
   - Run this command to see local branches: `git branch`
   - Run this command to see remote branches: `git branch -r`

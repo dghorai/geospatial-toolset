@@ -153,3 +153,4 @@ tests/results/*
 research/*
 
 notebooks/data/*
+start_jupyter.bat

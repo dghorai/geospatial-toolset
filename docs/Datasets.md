@@ -1,4 +1,4 @@
-# [List of Datasets](https://github.com/dghorai/geospatial-toolset/tree/main)
+# [List of Datasets](https://github.com/dghorai/geospatial-toolset)
 
 - LANDSAT Series
 	- [Landsat Satellite Missions](https://www.usgs.gov/landsat-missions/landsat-satellite-missions)

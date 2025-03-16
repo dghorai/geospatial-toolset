@@ -154,3 +154,4 @@ research/*
 
 notebooks/data/*
 start_jupyter.bat
+.vscode

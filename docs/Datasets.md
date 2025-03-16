@@ -1,0 +1,65 @@
+# List of Datasets
+
+- LANDSAT Series
+	- [Landsat Satellite Missions](https://www.usgs.gov/landsat-missions/landsat-satellite-missions)
+	- [landsatxplore](https://pypi.org/project/landsatxplore/)
+- Sentinel-1 & 2
+	- [Landsat & Sentinel-2 Data on AWS](https://www.matecdev.com/posts/landsat-sentinel-aws-s3-python.html)
+	- [Documentation of sentinelhub Python package](https://sentinelhub-py.readthedocs.io/en/latest/index.html
+	- [Conventional Data Access Hubs](https://www.copernicus.eu/en/access-data/conventional-data-access-hubs)
+	- [Sentinelsat Python API](https://sentinelsat.readthedocs.io/en/latest/api_overview.html)
+	- [Sentinel2tools: simple lib for downloading Sentinel-2 satellite images](https://quantumobile.com/rd-blog/sentinel2tools-simple-lib-for-downloading-sentinel-2-satellite-images/)
+	- [ICEcube Documentation](https://iceye-ltd.github.io/icecube/examples/Ex1_SARDatacube/)
+	- [Copernicus Browser - Data Search](https://browser.dataspace.copernicus.eu/?zoom=5&lat=50.16282&lng=20.78613&themeId=DEFAULT-THEME&visualizationUrl=U2FsdGVkX18k2TFLyYip1CfstQX5wIhwHn7Ui6menI8FQoWiIo32AJ1WmDvrtK%2F2PMvpzqXNE8CjrqBHZdU7RSaewp29ylakgkhWavaz%2BfJAWSnbHvkl3VhYFj6ap8lN&datasetId=S2_L2A_CDAS&demSource3D=%22MAPZEN%22&cloudCoverage=30&dateMode=SINGLE)
+	- [EO Browser](https://apps.sentinel-hub.com/eo-browser/?zoom=10&lat=41.9&lng=12.5&themeId=DEFAULT-THEME&visualizationUrl=https%3A%2F%2Fservices.sentinel-hub.com%2Fogc%2Fwms%2Ff2068f4f-3c75-42cf-84a1-42948340a846&datasetId=S1_AWS_IW_VVVH&fromTime=2021-03-28T00%3A00%3A00.000Z&toTime=2021-03-28T23%3A59%3A59.999Z&layerId=ENHANCED-VISUALIZATION-ORTHORECTIFIED&demSource3D=%22MAPZEN%22)
+- Soil Data
+	- [Bhoomi Geospatial](https://www.bhoomigeoportal-nbsslup.in/)
+	- [WoSIS: New set of standardized soil profiles released (wosis_latest, June 2022)](https://www.isric.org/news/wosis-new-set-standardized-soil-profiles-released-wosislatest-june-2022)
+	- [Soil Grids](https://soilgrids.org/)
+- Boundary
+	- [Political Map of India](https://surveyofindia.gov.in/pages/political-map-of-india)
+	- [India - Subnational Administrative Boundaries](https://data.humdata.org/dataset/geoboundaries-admin-boundaries-for-india?)
+	- [geoBoundaries](https://data.humdata.org/organization/8be95204-f453-4b66-a4f6-dbe84cb0bdee)
+	- [Shape files and Geojson files for various categories of India](https://github.com/datta07/INDIAN-SHAPEFILES)
+- Cadastral Data
+	- [BhuNaksha, Odisha](https://bhunakshaodisha.nic.in/)
+	- [Bhu-Naksha](https://bhunaksha.nic.in/bhunaksha/implementationstatus.jsp)
+	- [Revenue Maps Online](https://www.landrecords.karnataka.gov.in/service3/)
+- INSAT3D
+	- [INSAT-3D Data Products](https://www.mosdac.gov.in/insat-3d-data-products)
+- fAPAR
+	- [OLCI Processing](https://sentiwiki.copernicus.eu/web/olci-processing)
+- Weather Data
+	- [CLIMATE RESEARCH & SERVICES, PUNE](https://imdpune.gov.in/lrfindex.php)
+	- [Download and process binary IMD meteorological data in Python](https://github.com/iamsaswata/imdlib/tree/master)
+- Get Data from TensorFlow
+	- [TensorFlow Datasets](https://www.tensorflow.org/datasets/catalog/overview)
+- Phytoplankton
+	- [NASA Ocean Color](https://search.earthdata.nasa.gov/search?portal=obdaac)
+- Crop Yield & Production
+	- [District-wise yearly area, yield and production](http://data.icrisat.org/dld/src/crops.html)
+	- [Area and Production Statistics](https://aps.dac.gov.in/Home.aspx?ReturnUrl=%2f)
+- GEE Data
+	- [Sentinel Collections](https://developers.google.com/earth-engine/datasets/catalog/sentinel)
+	- [Earth Engine Data Catalog](https://developers.google.com/earth-engine/datasets/catalog)
+	- [Landsat Collections](https://developers.google.com/earth-engine/datasets/catalog/landsat)
+- DataCube
+	- [Image segmentation](https://docs.digitalearthafrica.org/en/latest/sandbox/notebooks/Frequently_used_code/Image_segmentation.html)
+- RS Data
+	- [Sources of Satellite Data](https://docs.google.com/spreadsheets/d/1oFY_TX5QRFyAAu-nxeClnOFB1epSlSDWEHoMalvv0Qs/edit?gid=0#gid=0)
+- Vector Data
+	- [geodata](https://www.geofabrik.de/data/)
+	- [Natural Earth](https://www.naturalearthdata.com/downloads/)
+	- [HydroSHEDS](https://www.hydrosheds.org/)
+	- [Global River Widths from Landsat (GRWL) Database](https://zenodo.org/records/1297434)
+	- [Shape of Watershed Boundaries of India](https://www.data.gov.in/resource/shape-watershed-boundaries-india)
+- Drought Data
+	- [India Drought Monitor](https://indiadroughtmonitor.in/)
+- Rainfall/Precipitation
+	- [Precipitation Estimation from Remotely Sensed Information using Artificial Neural Networks](https://chrsdata.eng.uci.edu/)
+	- [TRMM Data](https://disc.gsfc.nasa.gov/datasets?keywords=rainfall&page=1&project=TRMM)
+- Download Data from QGIS
+	- [Video Tutorial: Download high resolution satellite image using QGIS](https://www.youtube.com/watch?v=0wcx0HzFj3w&t=91s)
+	- [Video Tutorial: How to download High-resolution (0.3m) MAXAR satellite image for free, From OpenAreialMap & use GEE](https://www.youtube.com/watch?v=xGcup6_sYJM)
+- Open-Source Photos
+	- [Public Work by Cosmos](https://public.work/)

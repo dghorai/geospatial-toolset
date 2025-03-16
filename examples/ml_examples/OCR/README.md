@@ -14,7 +14,7 @@ OCR -> Optical Character Recognition
 - easy ocr (open source)
 - paddle ocr (open source)
 - amazon ocr (paid)
-- google ocr (patd)
+- google ocr (paid)
 - azure ocr (paid)
 
 

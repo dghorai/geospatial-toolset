@@ -5,7 +5,7 @@
 	- [landsatxplore](https://pypi.org/project/landsatxplore/)
 - Sentinel-1 & 2
 	- [Landsat & Sentinel-2 Data on AWS](https://www.matecdev.com/posts/landsat-sentinel-aws-s3-python.html)
-	- [Documentation of sentinelhub Python package](https://sentinelhub-py.readthedocs.io/en/latest/index.html
+	- [Documentation of sentinelhub Python package](https://sentinelhub-py.readthedocs.io/en/latest/index.html)
 	- [Conventional Data Access Hubs](https://www.copernicus.eu/en/access-data/conventional-data-access-hubs)
 	- [Sentinelsat Python API](https://sentinelsat.readthedocs.io/en/latest/api_overview.html)
 	- [Sentinel2tools: simple lib for downloading Sentinel-2 satellite images](https://quantumobile.com/rd-blog/sentinel2tools-simple-lib-for-downloading-sentinel-2-satellite-images/)

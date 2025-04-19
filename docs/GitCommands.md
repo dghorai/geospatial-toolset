@@ -9,7 +9,14 @@
   - Push to a branch if local branch already exists on the remote: `git push origin <new-branch-name>` or `git push`
   - Push to a branch if local branch does not exist on the remote: `git push -u origin <my-branch-name>` or `git push -u origin HEAD`
   - Create a new branch:
-    - `git checkout -b <new-branch-name>`
+    - Method 1:
+      - `git branch`
+      - `git checkout main / git checkout master`
+      - `git branch dev -> create new branch called dev`
+      - `git checkout dev -> switch to the dev branch`
+    - Method 2:
+      - `git checkout -b <new-branch-name>`
+    - Push the dev branch to GitHub: `git push -u origin dev`
   - Rename git branch:
     - To rename the current branch: `git branch -m <type new name of the current branch>`
     - To rename a branch while pointed to any branch: `git branch -m <old name of the branch> <new name of the branch>`

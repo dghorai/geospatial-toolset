@@ -63,3 +63,5 @@
 	- [Video Tutorial: How to download High-resolution (0.3m) MAXAR satellite image for free, From OpenAreialMap & use GEE](https://www.youtube.com/watch?v=xGcup6_sYJM)
 - Open-Source Photos
 	- [Public Work by Cosmos](https://public.work/)
+- LiDAR Data
+	- Maryland LiDAR Data: [Link-1](https://imap.maryland.gov/pages/lidar-download); [Link-2](https://doitdataservices.maryland.gov/s/N9xGBYPKq4QSZNq)

@@ -9,7 +9,7 @@ Distance measurement from baseline to past shorelines.
 """
 
 from osgeo import ogr
-from rsgtools.utils import dist_calc
+from src.utils.geo_utils import dist_calc
 
 
 # historical shoreline's distance measurement from baseline

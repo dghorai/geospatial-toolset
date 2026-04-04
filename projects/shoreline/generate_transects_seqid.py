@@ -13,15 +13,15 @@ import geopandas as gpd
 
 from pathlib import Path
 from osgeo import ogr
-from rsgtools.vector_ops.lines_middle_points import generate_lines_middle_point
-from rsgtools.utils import (
+from src.geo_apps.vector_ops.lines_middle_points import generate_lines_middle_point
+from src.geo_apps.vector_ops.create_buffer import buffer_feature
+from src.utils.geo_utils import (
     select_by_location,
     reading_polyline,
     get_shapefile_epsg_code,
     split_lines_at_points,
     unlink_files
 )
-from rsgtools.vector_ops.create_buffer import buffer_feature
 
 
 def create_line_seqid(line_feature, out_line_feature):

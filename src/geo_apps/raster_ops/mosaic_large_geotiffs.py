@@ -16,8 +16,9 @@ import subprocess
 
 from osgeo import gdal
 from osgeo.gdalconst import *
-from rsgtools import project_dir, logger
-from rsgtools.utils import timeit, write_geotiff_file
+from logger import logger
+from app import PRJ_DIR
+from src.utils.geo_utils import timeit, write_geotiff_file
 
 
 class LargeGeoTiffMosaic:
@@ -33,8 +34,7 @@ class LargeGeoTiffMosaic:
         """
         self.nodata = -9999
         # C/C++ Program for Python Extension
-        self.mylib = ctypes.CDLL(os.path.join(
-            project_dir, 'artifacts', 'library_windows64bit', 'floattoint.dll'))
+        self.mylib = ctypes.CDLL(os.path.join(PRJ_DIR, 'artifacts', 'extension', 'library_windows64bit', 'floattoint.dll'))
         self.Multiply_and_Convert_Values = self.mylib.Multiply_and_Convert_Values
         self.Multiply_and_Convert_Values.restype = None
         self.Multiply_and_Convert_Values.argtypes = [ctypes.c_int, ctypes.c_int, numpy.ctypeslib.ndpointer(

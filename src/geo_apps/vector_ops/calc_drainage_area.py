@@ -8,8 +8,8 @@ Calculate cumulative drainage area.
 """
 
 from osgeo import ogr
-from rsgtools import logger
-from rsgtools.config_entity import PolylineConfig, PolygonConfig
+from logger import logger
+from config import PolylineConfig, PolygonConfig
 
 
 class DrainageAreaCalc:

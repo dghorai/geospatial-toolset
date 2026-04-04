@@ -29,8 +29,8 @@ http://answers.google.com/answers/threadview/id/761806.html
 import re
 import numpy
 
-from rsgtools.utils import leap_year
-from rsgtools import CustomException
+from src.utils.geo_utils import leap_year
+from logger import CustomException
 
 
 class ShorelineChangerate:

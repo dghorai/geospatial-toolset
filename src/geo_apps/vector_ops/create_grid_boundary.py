@@ -10,9 +10,9 @@ Convert grid center points to square polygon/grid.
 import sys
 
 from osgeo import ogr
-from rsgtools import logger
-from rsgtools.config_entity import PointConfig, PolygonConfig
-from rsgtools.utils import get_shapefile_epsg_code
+from logger import logger
+from config import PointConfig, PolygonConfig
+from src.utils.geo_utils import get_shapefile_epsg_code
 
 
 class CreateGrid:

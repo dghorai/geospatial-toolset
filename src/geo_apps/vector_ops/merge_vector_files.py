@@ -9,8 +9,8 @@ Merge vector files.
 import os
 
 from osgeo import ogr
-from rsgtools.config_entity import VectordataConfig
-from rsgtools import CustomException
+from config import VectordataConfig
+from logger import CustomException
 
 
 class MergeVectorFiles:

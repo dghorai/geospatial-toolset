@@ -11,7 +11,7 @@ from collections import Counter
 from itertools import groupby
 from operator import itemgetter
 from osgeo import ogr
-from rsgtools.utils import unique_and_newfield, reading_polyline, line_fnt_nodes
+from src.utils.geo_utils import unique_and_newfield, reading_polyline, line_fnt_nodes
 
 
 class PolylineGeomOps:

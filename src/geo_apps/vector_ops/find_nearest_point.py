@@ -9,9 +9,9 @@ Closest point extraction between point and line.
 import sys
 
 from pathlib import Path
-from rsgtools.utils import reading_polyline, dist_calc
-from rsgtools.ref_scripts import intersect_point_to_line
-from rsgtools.config_entity import PointConfig, PolylineConfig
+from config import PointConfig, PolylineConfig
+from src.utils.geo_utils import reading_polyline, dist_calc
+from src.utils.ref_scripts import intersect_point_to_line
 
 
 class FindNearestPoint:

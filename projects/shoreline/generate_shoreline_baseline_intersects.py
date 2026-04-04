@@ -4,7 +4,7 @@ import geopandas as gpd
 import pandas as pd
 
 from shapely.geometry import LineString
-from rsgtools.utils import extend_line_shapefile, get_shapefile_epsg_code, unlink_files
+from src.utils.geo_utils import extend_line_shapefile, get_shapefile_epsg_code, unlink_files
 
 
 def get_intersects(baseline, transects, save=False, intersects_points=None):

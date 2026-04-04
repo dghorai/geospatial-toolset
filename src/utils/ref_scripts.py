@@ -8,7 +8,7 @@ from pyproj import Proj
 from scipy.spatial import ConvexHull
 from scipy.linalg import solve
 from app import DEG_TO_KM
-from rsgtools.utils import (
+from src.utils.geo_utils import (
     dist_calc,
     flip_line,
     reading_polyline,

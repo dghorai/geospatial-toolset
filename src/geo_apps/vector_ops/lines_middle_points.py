@@ -12,8 +12,8 @@ import os
 import glob
 
 from osgeo import ogr
-from rsgtools.ref_scripts import interval_point
-from rsgtools.utils import dist_calc
+from src.utils.ref_scripts import interval_point
+from src.utils.geo_utils import dist_calc
 
 
 def generate_lines_middle_point(line_feature=None, out_mid_points=None):

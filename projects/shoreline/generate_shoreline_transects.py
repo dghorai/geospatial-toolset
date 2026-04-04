@@ -9,8 +9,8 @@ Generate shoreline transects.
 """
 
 from osgeo import ogr
-from rsgtools.ref_scripts import fixed_interval_points
-from rsgtools.vector_ops.find_nearest_point import get_nearest_point
+from src.utils.ref_scripts import fixed_interval_points
+from src.geo_apps.vector_ops.find_nearest_point import get_nearest_point
 
 
 def create_shoreline_transects(onshore_line=None, offshore_line=None, out_transect_line=None, x_interval=None):

@@ -10,7 +10,7 @@ import pandas as pd
 import shapely.ops as sp_ops
 
 from pyproj import Transformer
-from rsgtools.ref_scripts import find_wgs2utm_epsg_code
+from src.utils.ref_scripts import find_wgs2utm_epsg_code
 
 def buffer_feature(input_feature, buffer_offset=None, src_epsg_code=None, save=False, out_buffer_feature=None):
     if isinstance(input_feature, str):

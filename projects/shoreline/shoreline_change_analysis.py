@@ -16,12 +16,13 @@
 
 
 import os
-from rsgtools.utils import unlink_files
-from rsgtools.geo_app.generate_shoreline_transects import create_shoreline_transects
-from rsgtools.geo_app.generate_transects_seqid import yield_transects_seqid
-from rsgtools.geo_app.generate_shoreline_baseline_intersects import create_changerate_analysis_points
-from rsgtools.geo_app.calc_shoreline_dist_from_baseline import measure_historical_shoreline_distance
-from rsgtools.geo_app.calc_shoreline_changerate import generate_shoreline_chargerate_values
+
+from src.utils.geo_utils import unlink_files
+from projects.shoreline.generate_shoreline_transects import create_shoreline_transects
+from projects.shoreline.generate_transects_seqid import yield_transects_seqid
+from projects.shoreline.generate_shoreline_baseline_intersects import create_changerate_analysis_points
+from projects.shoreline.calc_shoreline_dist_from_baseline import measure_historical_shoreline_distance
+from projects.shoreline.calc_shoreline_changerate import generate_shoreline_chargerate_values
 
 
 class ShorelineChangeAnalysis:

@@ -25,7 +25,7 @@ from fiona import collection
 from fiona.crs import from_epsg
 from ensure import ensure_annotations
 # from typing import Any
-from rsgtools import CustomException, logger
+from logger import CustomException, logger
 from app import DEG_TO_KM
 
 # Set GDAL/Geopandas Configuration

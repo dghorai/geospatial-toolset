@@ -1,0 +1,2 @@
+### Get list of files in current directory:
+-> dir /b

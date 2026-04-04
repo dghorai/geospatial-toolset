@@ -72,3 +72,22 @@ Learning and sharing practical experience of Ubuntu Desktop
 - Reference
   - [Prakash, A. (2023). Add ‘New Document’ Option in Right-Click Menu in Ubuntu.](https://itsfoss.com/add-new-document-option/)
   - [Kaufman, L. (2021). How to Quickly Create a New, Blank Text File on Windows, Mac, and Linux.](https://www.groovypost.com/howto/quickly-create-new-blank-text-file-windows-mac-linux/)
+
+
+### Commands
+- [Miniconda installation process (1)](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
+- [Miniconda installation process (2)](https://www.hostinger.com/tutorials/how-to-install-anaconda-on-ubuntu/)
+- [minimize-apps-on-click](https://www.linuxuprising.com/2018/04/how-to-enable-minimize-on-click-for.html)
+- [activate/deactivate conda virtual environment](https://stackoverflow.com/questions/55171696/how-to-remove-base-from-terminal-prompt-after-updating-conda)
+- [speed up your Ubuntu System](https://vitux.com/5-ways-to-speed-up-ubuntu/)
+- [Ubuntu 22.04 review (1)](https://averagelinuxuser.com/ubuntu-22-04-review/)
+- [Ubuntu 22.04 review (2)](https://www.omgubuntu.co.uk/2022/04/installed-ubuntu-22-04-do-these-things-next)
+- [Safely remove an external drive](https://help.ubuntu.com/stable/ubuntu-help/files-removedrive.html.en)
+
+
+### [redis server related](https://stackoverflow.com/questions/36088409/error-111-connecting-to-localhost6379-connection-refused-django-heroku)
+1) Install redis-server: sudo apt-get install redis-server
+2) Start redis-server: sudo service redis-server start
+3) Stop redis-server: sudo service redis-server stop
+4) Restart redis-server: sudo service redis-server restart
+5) Status of redis-server: sudo service redis-server status

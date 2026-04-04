@@ -75,6 +75,7 @@ Chapter 2. Learning Python for Geospatial Analysis
 6. Data Visualization
     - Matplotlib
     - Seaborn
+
 Chapter 3. Geospatial Toolset
 1. Importing geospatial toolset modules
 2. next...

@@ -4,6 +4,7 @@ Created on Sun Apr 24 2022
 @author: Debabrata Ghorai, Ph.D.
 
 Convert grid center points to square polygon/grid.
+
 """
 
 
@@ -13,6 +14,7 @@ from osgeo import ogr
 from logger import logger
 from config import PointConfig, PolygonConfig
 from src.utils.geo_utils import get_shapefile_epsg_code
+from consts import DEG_TO_KM
 
 
 class CreateGrid:
@@ -26,7 +28,7 @@ class CreateGrid:
     def create_grid_nodes(self, layer, src_epsg_code, offset=None):
         if src_epsg_code == 4326:
             # assuming units are in meter
-            offset = offset*(1/(111.0*1000))
+            offset = offset*(1/(DEG_TO_KM*1000))
 
         xylist = []
         for row in range(layer.GetFeatureCount()):
@@ -45,24 +47,32 @@ class CreateGrid:
                 polCoord.append(xyPol)
         else:
             raise Exception("Grid offset not provided")
+            
         return polCoord
 
     def point_to_grid(self):
         # open the data source
         dataSource = ogr.Open(self.pointfile)
         src_epsg_code = get_shapefile_epsg_code(self.pointfile)
+        
         if dataSource is None:
             logger.info('Could not open {}'.format(self.pointfile))
             sys.exit(1)  # exit with an error code
+            
         # get the data layer
         layer = dataSource.GetLayer()
         polCoord = self.create_grid_nodes(
-            layer, src_epsg_code, offset=self.offset)
+            layer, 
+            src_epsg_code, 
+            offset=self.offset
+        )
         # create the output shapefile in the above directory
         driver = ogr.GetDriverByName('ESRI Shapefile')
         outDataSource = driver.CreateDataSource(self.outfile)
         outLayer = outDataSource.CreateLayer(
-            self.outfile, geom_type=ogr.wkbPolygon)
+            self.outfile, 
+            geom_type=ogr.wkbPolygon
+        )
         # create field
         outField = ogr.FieldDefn('OBJECTID', ogr.OFTInteger)
         outField.SetWidth(10)
@@ -70,23 +80,30 @@ class CreateGrid:
         outLayer.CreateField(outField)
         # get the feature definition for the shapefile
         featureDefn = outLayer.GetLayerDefn()
+        
         # polygon construction
         for ix, feat in enumerate(polCoord):
             ring = ogr.Geometry(ogr.wkbLinearRing)
             poly = ogr.Geometry(ogr.wkbPolygon)
+            
             for n in feat:
                 ring.AddPoint(n[0], n[1])
+                
             ring.CloseRings()
             poly.AddGeometry(ring)
+            
             # create new features and set geometry and attribute
             outFeature = ogr.Feature(featureDefn)
             outFeature.SetGeometry(poly)
             outFeature.SetField('OBJECTID', ix+1)
+            
             # add new feature to output layer
             outLayer.CreateFeature(outFeature)
+            
         # Destroy data source
         outDataSource.Destroy()
         # create *.prj file
+        
         try:
             outSpatialRef = layer.GetSpatialRef()
             outSpatialRef.ExportToWkt()
@@ -96,8 +113,10 @@ class CreateGrid:
             file.close()
         except:
             logger.info("Input data has no projection!")
+            
         # destry input dataSource (do not destry before creation of projection file)
         dataSource.Destroy()
+        
         return
 
 

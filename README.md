@@ -15,24 +15,13 @@ This is also a Python library aims to simplify machine learning tasks and automa
 
 pip install git+https://github.com/dghorai/geospatial-toolset
 
-# Contributing
-We welcome contributions! If you wish to contribute to this repository, kindly adhere to the guidelines provided below. We greatly appreciate any enhancements, bug fixes, or additional projects.
-
-- Fork the repository to your GitHub account
-- Establish a fresh branch for your modifications or contributions
-- Implement your alterations, improvements, or repairs in your branch
-- Verify your modifications to guarantee they do not cause any problems
-- Record your modifications with a concise and detailed commit message
-- Upload/Push your modifications to your forked repository
-- Finally, submit a pull request to the main repository
-
-# Geospatial Analysis Toolset
+# Geospatial Data Science Toolset
 
 Chapter 1. Getting Started
 1. Introduction
 2. Start from here
 
-Chapter 2. Learning Python for Geospatial Analysis
+Chapter 2. Learning Python for Geospatial Data Science
 1. [Basic of Python Language](https://docs.python.org/3/tutorial/index.html)
 2. Python Packages for Geospatial
     - GDAL/OGR
@@ -52,7 +41,7 @@ Chapter 2. Learning Python for Geospatial Analysis
     - scikit-image
     - json
     - etc.
-4. Python Packages for Machine Learning
+3. Python Packages for Machine Learning
     - Scikit-learn (popular library for traditional ML)
     - XGBoost (gradient-boosted decision trees)
     - LightGBM (gradient boosting framework)
@@ -72,9 +61,14 @@ Chapter 2. Learning Python for Geospatial Analysis
     - Pandas
     - NumPy
     - SciPy
-6. Data Visualization
+4. Data Visualization
     - Matplotlib
     - Seaborn
+5. Python IDEs
+    - Professional: PyCharm (JetBrains), VS Code (Microsoft), PyDev, etc.
+    - Data Science/Scientific Computing: Spyder, JupyterLab, Google Colab, etc.
+    - AI-assisted: Cursor, Windsurf, etc.
+    - Beginner: Python IDLE
 
 Chapter 3. Geospatial Toolset
 1. Importing geospatial toolset modules
@@ -108,3 +102,14 @@ Chapter 3. Geospatial Toolset
     </tr>
   </tbody>
 </table>
+
+# Contributing
+We welcome contributions! If you wish to contribute to this repository, kindly adhere to the guidelines provided below. We greatly appreciate any enhancements, bug fixes, or additional projects.
+
+- Fork the repository to your GitHub account
+- Establish a fresh branch for your modifications or contributions
+- Implement your alterations, improvements, or repairs in your branch
+- Verify your modifications to guarantee they do not cause any problems
+- Record your modifications with a concise and detailed commit message
+- Upload/Push your modifications to your forked repository
+- Finally, submit a pull request to the main repository

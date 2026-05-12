@@ -4,136 +4,125 @@ Created on Fri Apr 5 19:26:11 2024
 
 @author: Debabrata Ghorai, Ph.D.
 
-Flask Application - Manage PyGeoML Projects.
+Streamlit Server - An Independent Server for Fronted GUI.
+
 """
 
 import os
 import sys
-sys.path.append('src')
+import streamlit as st
 
-from flask import Flask, request, render_template, jsonify
-from flask_cors import CORS, cross_origin
-from pathlib import Path
-
-from ml_models.prediction_pipeline import CustomData, PredictPipeline
-from classification.xgboost.pipeline.prediction_pipeline import CustomData, PredictPipeline
-# from classification.cnn_classifier.pipeline.predict import PredictionPipeline
-# from classification.cnn_classifier.utils.utilities import decode_image
-# from config import PRJ_DIR
+from streamlit.web import cli as stcli
+from src.gui.toolbox import my_toolbox
+from src.gui.shoreline_transects import gui_shoreline_transects
+from consts import PRJ_FLD
 
 
-# app = Flask(__name__)
-app = Flask(__name__, template_folder='templates')
-CORS(app)
-
-os.putenv('LANG', 'en_US.UTF-8')
-os.putenv('LC_ALL', 'en_US.UTF-8')
-
-# config
-DEG_TO_KM = 111.0  # https://education.nationalgeographic.org/resource/latitude/
-PRJ_DIR = os.path.dirname(os.path.abspath(__file__))
-CONFIG_FILE_PATH = Path("config.yaml")
-PARAMS_FILE_PATH = Path("params.yaml")
+# Define your preferred base path
+custom_path = os.path.join(PRJ_FLD, "tmp")
+os.makedirs(custom_path, exist_ok=True)
 
 
-# class ClientApp:
-#     def __init__(self):
-#         self.filename = os.path.join(PRJ_DIR, "artifacts", "classification", "cnn_classifier", "test_data", "input_image.jpg")
-#         self.classifier = PredictionPipeline(self.filename)
-
-
-# define the home page of the site
-@app.route('/')  # this sets the route to this page
-def home():
-    data = {}
-    return render_template('index.html', data=data)
-
-
-@app.route('/regression')
-def regression_home_page():
-    return render_template('/regression/random_forest/index.html')
-
-
-@app.route('/regression/predict1', methods=['GET', 'POST'])
-def regression_predict_user_data():
-    if request.method == 'GET':
-        return render_template('/regression/random_forest/form.html')
-    else:
-        user_inputs = {
-            'value1': float(request.form['crim']),
-            'value2': float(request.form['zn']),
-            'value3': float(request.form['indus']),
-            'value4': float(request.form['chas']),
-            'value5': float(request.form['age']),
-            'value6': float(request.form['dis']),
-            'value7': float(request.form['rad']),
-            'value8': float(request.form['b']),
-            'value9': float(request.form['lstat'])
+# CSS TO REMOVE WHITESPACE, CSS TO ELIMINATE THE GAP
+st.markdown("""
+    <style>
+        /* 1. Global Page Top Padding */
+        .block-container {
+            padding-top: 1rem !important;
+            padding-bottom: 0rem !important;
         }
-        user_data = CustomData(**user_inputs)
-        y_test = user_data.get_user_inputs()
-        predict_pipeline = PredictPipeline()
-        res = predict_pipeline.predict(y_test)
-        results = round(res[0], 2)
-        return render_template('/regression/random_forest/results.html', final_result=results)
 
+        /* 2. Sidebar Top Padding */
+        [data-testid="stSidebarNav"] {
+            padding-top: 0rem !important;
+        }
+        [data-testid="stSidebar"] .st-emotion-cache-6qob1r {
+            padding-top: 1rem !important;
+        }
 
+        /* 3. Eliminate Gap between Navbar and Divider */
+        /* Targets the vertical spacing between the nav columns and the line */
+        [data-testid="stVerticalBlock"] > div:has(div[data-testid="stHorizontalBlock"]) {
+            gap: 0rem !important;
+        }
+
+        /* Targets the widget's internal bottom margin */
+        [data-testid="stBaseButton-segmented_control"] {
+            margin-bottom: 0px !important;
+        }
         
-@app.route('/classification')
-def classification_home_page():
-    return render_template('/classification/xgboost/index.html')
-
-
-@app.route('/classification/predict1', methods=['GET', 'POST'])
-def classification_predict_user_data():
-    if request.method == 'GET':
-        return render_template('/classification/xgboost/form.html')
-    else:
-        user_inputs = {
-            'age': float(request.form['age']),
-            'workclass': str(request.form['workclass']),
-            'fnlwgt': float(request.form['fnlwgt']),
-            'education': str(request.form['education']),
-            'education_num': float(request.form['education_num']),
-            'marital_status': str(request.form['marital_status']),
-            'occupation': str(request.form['occupation']),
-            'relationship': str(request.form['relationship']),
-            'race': str(request.form['race']),
-            'sex': str(request.form['sex']),
-            'capital_gain': float(request.form['capital_gain']),
-            'capital_loss': float(request.form['capital_loss']),
-            'hours_per_week': float(request.form['hours_per_week']),
-            'native_country': str(request.form['native_country'])
+        /* 4. Tighten the Divider (The Line) */
+        hr {
+            margin-top: 0px !important;
+            margin-bottom: 1rem !important;
         }
-        user_data = CustomData(**user_inputs)
-        y_test = user_data.get_user_inputs()
-        predict_pipeline = PredictPipeline()
-        results = predict_pipeline.predict(y_test)
-        return render_template('/classification/xgboost/results.html', final_result=results)
+    </style>
+""", unsafe_allow_html=True)
+
+
+# MAIN function of this app
+def run_app():
+    # --- PAGE CONFIG ---
+    st.set_page_config(page_title="Geospatial Toolset", layout="wide", page_icon="🗺")
     
+    # TOP NAV (Horizontal Right) - We use columns to push the tabs to the right
+    col_empty, col_nav = st.columns([3, 2])
+    with col_nav:
+        # label_visibility is now "visible" by default
+        selected_subject = st.segmented_control(
+            "Select Subject Area",  # This label will now be visible
+            options=list(my_toolbox.keys()),
+            selection_mode="single",
+            default="🏠 Home"
+        )
+    # Break page
+    st.divider()
 
-# @app.route("/", methods=['GET'])
-# @cross_origin()
-# def home():
-#     return render_template('/classification/cnn_classifier/index.html')
+    # SIDEBAR (Dynamic based on Navbar selection)
+    with st.sidebar:
+        st.header(f"{selected_subject}")
+        st.subheader("Available Tools")
+        # The tools list changes based on what you picked in the Navbar
+        selected_tool = st.selectbox(
+            "Choose a tool:", 
+            options=my_toolbox[selected_subject]
+        )
+        # status text
+        st.info(f"Currently using: {selected_tool}")
+    
+    # MAIN BODY (Content based on the Tool) - with active_tab:
+    st.title(f"Tool: {selected_tool}")
+    st.write(f"This is the interface for the **{selected_tool}** tools.")
 
-# @app.route("/train", methods=['GET', 'POST'])
-# @cross_origin()
-# def trainRoute():
-#     os.system("python main.py")
-#     return "Training done successfully!"
+    # Call Tool-Specific Logic
+    if selected_tool == "Extract Shorelines":
+        st.button("Run Scrubbing Script")
+    elif selected_tool == "Create Transects":
+        gui_shoreline_transects(custom_path)         
+    elif selected_tool == "Add Transects SeqID":
+        st.line_chart([1, 2, 3, 5, 8])
+    elif selected_tool == "Shoreline Change Analysis":
+        st.button("Shoreline Change Analysis")
+    else:
+        raise Exception(f"{selected_tool} tools not available in this app.")
 
-# @app.route("/predict", methods=['POST'])
-# @cross_origin()
-# def predictRoute():
-#     image = request.json['image']
-#     decode_image(image, clApp.filename)
-#     result = clApp.classifier.predict()
-#     return jsonify(result)
-# # call client app
-# clApp = ClientApp()
-                    
+    # --- FOOTER ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.divider()
+    st.caption("Geospatial Toolset | Developed by Debabrata Ghorai, PhD.")
+
+    return
 
 
-if __name__ == '__main__':
-    app.run(debug=True)  # "debug=True": allows possible Python errors to appear on the web page.
+if __name__ == "__main__":
+    if st.runtime.exists():
+        # If we are already in the Streamlit environment, run the app logic
+        run_app()
+    else:
+        # If we are running 'python app.py', trigger the Streamlit CLI
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        sys.exit(stcli.main())
+
+# Note: Press Ctrl+C to stop streamlit server.
+# Activate Virtual Env: <virtual env path>\Scripts\activate.ps1
+# Run this app:  streamlit run app.py

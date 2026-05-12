@@ -1,11 +1,19 @@
-# Build a voting selector
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 12 19:26:11 2026
+
+@author: Debabrata Ghorai, Ph.D.
+
+Find best MF features.
+
+"""
+
 import warnings
 import pandas as pd
 
-from logger import logger
 from feature_selection.data_transformation import DataProcessing
-from feature_selection.feature_selection_methods import BestFeatureSelector
-
+from feature_selection.feature_selection_algo import BestFeatureSelector
+from logger import logger
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 pd.options.mode.chained_assignment = None  # default='warn'

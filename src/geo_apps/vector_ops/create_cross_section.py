@@ -5,7 +5,8 @@ Created on Sun Apr 24 2022
 @author: Debabrata Ghorai, Ph.D.
 
 Generate perpendicular line along polyline at specific interval and
-assign uniqueid to the perpendicular lines.
+assign unique id to the perpendicular lines.
+
 """
 
 import os
@@ -16,6 +17,7 @@ from logger import logger
 from config import PolylineConfig
 from src.utils.ref_scripts import fixed_interval_points
 from src.utils.geo_utils import get_shapefile_epsg_code
+from consts import DEG_TO_KM
 
 
 class XSCL:
@@ -35,15 +37,19 @@ class XSCL:
         src_epsg_code = get_shapefile_epsg_code(infc)
         if src_epsg_code == 4326:
             # assuming units are in meter
-            interval = interval*(1/(111.0*1000))
-            offset = offset*(1/(111.0*1000))
+            interval = interval*(1/(DEG_TO_KM*1000))
+            offset = offset*(1/(DEG_TO_KM*1000))
 
         objids = []
         lineids = []
         try:
             # generate perpendicular line nodes
             iPts, iSlp = fixed_interval_points(
-                infc, interval, flipline=True, lineslope=True)
+                infc, 
+                interval, 
+                flipline=True, 
+                lineslope=True
+            )
 
             xscl = list()
             for i, j in zip(iPts, iSlp):
@@ -60,27 +66,34 @@ class XSCL:
                     p2 = i[0]-dx, i[1]+dy
                 else:
                     logger.info("Extra Point:", i, j)
+                    
                 v1 = p1, p2, i[2]
                 xscl.append(v1)
 
-            if save == True:
+            if save:
                 # perpendicular lines creation
                 shapefile = ogr.Open(infc)
                 layer = shapefile.GetLayer(0)
                 spr = layer.GetSpatialRef()
                 spr.ExportToWkt()
                 driver = ogr.GetDriverByName('ESRI Shapefile')
+                
                 if os.path.exists(outfc):
                     driver.DeleteDataSource(outfc)
+                    
                 shapeData = driver.CreateDataSource(outfc)
                 lyr = shapeData.CreateLayer(
-                    'myLyr2', spr, geom_type=ogr.wkbMultiLineString)
+                    'myLyr2', 
+                    spr, 
+                    geom_type=ogr.wkbMultiLineString
+                )
                 # create fileds
                 lineid = ogr.FieldDefn("LINEID", ogr.OFTInteger)
                 lyr.CreateField(lineid)
                 objectid = ogr.FieldDefn("OBJECTID", ogr.OFTInteger)
                 lyr.CreateField(objectid)
                 lyrDef = lyr.GetLayerDefn()
+                
                 for ix, row in enumerate(xscl):
                     s, e, n = row[0], row[1], row[2]
                     line = ogr.Geometry(ogr.wkbLineString)
@@ -91,6 +104,7 @@ class XSCL:
                     feature.SetField("OBJECTID", ix+1)
                     feature.SetField("LINEID", n)
                     lyr.CreateFeature(feature)
+                    
                 # Flush
                 shapeData.Destroy()
             else:
@@ -102,7 +116,7 @@ class XSCL:
             logger.info(e)
 
         # return
-        if save == False:
+        if not save:
             return objids, lineids
 
     def create_xscl_uniqueid(self):
@@ -113,6 +127,7 @@ class XSCL:
                 lineids = []
                 shapefile = ogr.Open(self.outfc)
                 layer = shapefile.GetLayer(0)
+                
                 for row in range(layer.GetFeatureCount()):
                     feature = layer.GetFeature(row)
                     objid = feature.GetField(self.objectidfield)
@@ -123,18 +138,28 @@ class XSCL:
                 raise Exception("outfc not provided")
         else:
             self.construct_perpendicular_line(
-                infc=self.infc, outfc=self.outfc, interval=self.interval, offset=self.offset)
+                infc=self.infc, 
+                outfc=self.outfc, 
+                interval=self.interval, 
+                offset=self.offset
+            )
             objids, lineids = self.construct_perpendicular_line(
-                infc=self.infc, interval=self.interval, offset=self.offset, save=False)
+                infc=self.infc, 
+                interval=self.interval, 
+                offset=self.offset, 
+                save=False
+            )
 
         # get unique lineids
         unqlineids = list(set(lineids))
+        
         comid = []
         for i in unqlineids:
             v2 = []
             for j in objids:
                 if i == j[0]:
                     v2.append(j[1])
+                    
             comid.append([i, v2])
 
         # write shapefile
@@ -142,9 +167,11 @@ class XSCL:
         dataSource = driver.Open(self.outfc, 1)
         outlyr = dataSource.GetLayer()
         defn = outlyr.GetLayerDefn()
+        
         if defn.GetFieldIndex(self.uidfield) == -1:
             # create fileds
             outlyr.CreateField(ogr.FieldDefn(self.uidfield, ogr.OFTString))
+            
         # feat_def.AddFieldDefn(uidfield)
         for u in range(outlyr.GetFeatureCount()):
             feat = outlyr.GetFeature(u)
@@ -155,12 +182,13 @@ class XSCL:
                         new_id = str(k[0])+"_"+str(l)
                         feat.SetField(self.uidfield, new_id)
                         outlyr.SetFeature(feat)
+                        
         # Flush
         dataSource.Destroy()
         return
 
 
-def generate_river_xscl(
+def generate_xscl(
     river_network_file,
     out_xscl_file,
     xscl_uid_field,

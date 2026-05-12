@@ -15,6 +15,7 @@ Py6S
 shapely
 scikit-learn
 tqdm
+streamlit
 PyYAML
 seaborn
 modape

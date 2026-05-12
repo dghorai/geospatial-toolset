@@ -5,13 +5,18 @@ Created on Sun Apr 24 2022
 @author: Debabrata Ghorai, Ph.D.
 
 Polyline geometry operation for flood GIS utilities.
+
 """
 
 from collections import Counter
 from itertools import groupby
 from operator import itemgetter
 from osgeo import ogr
-from src.utils.geo_utils import unique_and_newfield, reading_polyline, line_fnt_nodes
+from src.utils.geo_utils import (
+    unique_and_newfield, 
+    reading_polyline, 
+    line_fnt_nodes
+)
 
 
 class PolylineGeomOps:
@@ -38,6 +43,7 @@ class PolylineGeomOps:
                 for k in ftnodes:
                     if a == k[2]:
                         terminals.append(k[1])
+                        
         # get line segment of the first terminal
         tcid = []
         toconnect = []
@@ -46,9 +52,11 @@ class PolylineGeomOps:
                 if t == i[2]:
                     toconnect.append([t, i[1]])
                     tcid.append(t)
+                    
         group_1 = list(set(terminals)-set(list(set(tcid))))
         # get a copy of toconnect
         toconnect2 = toconnect
+        
         # findings all connected line segments
         toconnect3 = []
         for x in range(len(segment_counts)):
@@ -58,16 +66,20 @@ class PolylineGeomOps:
                 break
             else:
                 toconnect3.append(xt)
+                
         # iCon list normalization
         toconnect4 = []
         for p in toconnect3:
             for q in p:
                 toconnect4.append(q)
+                
         # Concatenation previous line ID and next all IDs
         toconnect5 = toconnect4 + toconnect2
         # Combine connected lines ID based on Terminals ID
-        group_2 = [(k, [v[1] for v in g])
-                   for k, g in groupby(sorted(toconnect5), key=itemgetter(0))]
+        group_2 = [
+            (k, [v[1] for v in g])
+            for k, g in groupby(sorted(toconnect5), key=itemgetter(0))
+        ]
         # return segment ids
         return group_1, group_2
 
@@ -77,15 +89,17 @@ class PolylineGeomOps:
             if comid == s:
                 feat.SetField(fieldname, s)
                 layer.SetFeature(feat)
-            del s
+            
         for v in group_2:
             if comid == v[0]:
                 feat.SetField(fieldname, v[0])
                 layer.SetFeature(feat)
+                
             for w in v[1]:
                 if comid == w:
                     feat.SetField(fieldname, v[0])
                     layer.SetFeature(feat)
+                    
         return
 
     def find_line_terminals(self, tmnl2, mfl2):
@@ -113,6 +127,7 @@ class PolylineGeomOps:
                 for j in segments:
                     if enode == j[2]:
                         tlist.append((enode, j[0], j[1]))
+                        
             # group to-nodes
             count = Counter(tlist)
             # filter to-nodes if count is 1
@@ -120,6 +135,7 @@ class PolylineGeomOps:
             for t in count.keys():
                 if count[t] == 1:
                     tmnl.append((t[1], t[2]))
+                    
             # take the first to-node from the above list as starting point of hydro id generation
             newid = [(tmnl[0][0], 1)]
             # loop over segments, find terminals, and group segments
@@ -134,13 +150,16 @@ class PolylineGeomOps:
                         hydronum[ii+1].append(jj[0])
                 else:
                     break
+                    
             # assign numbers to each group-segment id
             num = 2
             for k in hydronum.keys():
                 for v in hydronum[k]:
                     newid.append((v, num))
                     num += 1
+                    
             hydroids.append(newid)
+            
         return hydroids
 
     def line_direction_topology(self, ftnodes):
@@ -151,6 +170,7 @@ class PolylineGeomOps:
         for ft in ftnodes:
             fNode.append(ft[1])
             tNode.append(ft[2])
+            
         # group from/to nodes
         fCnt = Counter(fNode)
         tCnt = Counter(tNode)
@@ -159,17 +179,20 @@ class PolylineGeomOps:
         for i, j in zip(fCnt.keys(), fCnt.values()):
             fval = i, j
             fCount.append(fval)
+            
         # create to-node list
         tCount = []
         for k, v in zip(tCnt.keys(), tCnt.values()):
             tval = k, v
             tCount.append(tval)
+            
         # geom operation
         tfMatch = []
         for t in tCount:
             for f in fCount:
                 if t[0] == f[0]:
                     tfMatch.append(t)
+                    
         # create unique value list
         tfNotMatch = list(set(tCount)-set(tfMatch))
         tfIDs = []
@@ -178,6 +201,7 @@ class PolylineGeomOps:
                 for ft in ftnodes:
                     if tf[0] == ft[2]:
                         tfIDs.append(ft[1])
+                        
         return tfIDs
 
     def CreateObjectID(self, inshp, fieldname="OBJECTID"):
@@ -187,6 +211,7 @@ class PolylineGeomOps:
         dataSource = driver.Open(inshp, 1)
         layer = dataSource.GetLayer()
         unqfieldname = unique_and_newfield(layer, fieldname)
+        
         if unqfieldname:
             print("{} already exists".format(fieldname))
         else:
@@ -196,26 +221,31 @@ class PolylineGeomOps:
                 feature = layer.GetFeature(u)
                 feature.SetField(fieldname, objectid)
                 layer.SetFeature(feature)
+                
             # flash
             dataSource.Destroy()
+            
         return
 
     def FnTnodeID(self, inshp, isterminal=False, updatefield=True):
         """Generate from-node and to-node id for each line segment"""
         segment_counts, line_nodes = reading_polyline(inshp)
         nodeids, terminal = line_fnt_nodes(line_nodes, segment_counts)
-        if updatefield == True:
+        
+        if updatefield:
             # update shapefile
             driver = ogr.GetDriverByName('ESRI Shapefile')
             dataSource = driver.Open(inshp, 1)
             layer = dataSource.GetLayer()
             unqfieldname = unique_and_newfield(layer, "FNODE")
             _ = unique_and_newfield(layer, "TNODE")
+            
             # update segments
             if unqfieldname:
                 for u in range(layer.GetFeatureCount()):
                     feature = layer.GetFeature(u)
                     objectid = feature.GetField(unqfieldname)
+                    
                     for n in nodeids:
                         if objectid == n[0]:
                             feature.SetField("FNODE", n[1])
@@ -225,16 +255,18 @@ class PolylineGeomOps:
                 for u in range(layer.GetFeatureCount()):
                     objectid = u+1
                     feature = layer.GetFeature(u)
+                    
                     for n in nodeids:
                         if objectid == n[0]:
                             feature.SetField("FNODE", n[1])
                             feature.SetField("TNODE", n[2])
                             layer.SetFeature(feature)
+                            
             # flash
             dataSource.Destroy()
 
         # return final nodeids
-        if isterminal == True:
+        if isterminal:
             return nodeids, terminal
         else:
             return nodeids
@@ -249,21 +281,27 @@ class PolylineGeomOps:
         ftnodes = self.FnTnodeID(inlineshp, updatefield=False)
         group_1, group_2 = self.group_segments(ftnodes, segment_counts)
         unqfieldname = unique_and_newfield(layer, fieldname)
+        
         if unqfieldname:
             for u in range(layer.GetFeatureCount()):
                 feat = layer.GetFeature(u)
                 comid = feat.GetField(unqfieldname)
-                self.update_field(group_1, group_2, layer,
-                                  feat, comid, fieldname)
+                self.update_field(
+                    group_1, group_2, layer, 
+                    feat, comid, fieldname
+                )
         else:
             for u in range(layer.GetFeatureCount()):
                 feat = layer.GetFeature(u)
                 comid = u+1
-                self.update_field(group_1, group_2, layer,
-                                  feat, comid, fieldname)
+                self.update_field(
+                    group_1, group_2, layer, 
+                    feat, comid, fieldname
+                )
         # flash
         dataSource.Destroy()
-        return "Process Completed!"
+        
+        return
 
     def GenerateHydroID(self, infc, groupid="GROUPID", outfield="HydroID"):
         """Update field"""
@@ -275,6 +313,7 @@ class PolylineGeomOps:
         gdisc = reading_polyline(infc, fieldname=groupid)
         unqfieldname = unique_and_newfield(layer, outfield)
         hydroids = self.generate_hydroid(gdisc)
+        
         # update segments
         if unqfieldname:
             hydid = 1
@@ -300,13 +339,14 @@ class PolylineGeomOps:
                             hydid += 1
         # flash
         dataSource.Destroy()
-        return "Process Completed!"
+        return
 
     def LineDirectionError(self, infc):
         """Get all line directional error"""
         # streamline nodes accessing
         objects, nodes = reading_polyline(infc)
         tonodes1 = self.FnTnodeID(infc)
+        
         # flip line
         revered_nodes = []
         rsegment_counts = []
@@ -316,12 +356,14 @@ class PolylineGeomOps:
                 ln.append(r)
             revered_nodes.append(ln)
             rsegment_counts.append(y)
+            
         # ftnodes of flip lines
         tonodes2, _ = line_fnt_nodes(revered_nodes, rsegment_counts)
         # line dirrectional error
         from_direction_topology = self.line_direction_topology(tonodes2)
         to_direction_topology = self.line_direction_topology(tonodes1)
         direction_errors = from_direction_topology + to_direction_topology
+        
         return direction_errors
 
 

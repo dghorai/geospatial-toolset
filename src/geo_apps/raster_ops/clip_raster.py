@@ -4,7 +4,10 @@ Created on Mon Mar 14 2016
 
 @author: Debabrata Ghorai, Ph.D.
 
-Clip Raster Data.
+Clip Raster Data:
+(i) by polygon extent 
+(ii) by polygon mask
+
 """
 
 import sys

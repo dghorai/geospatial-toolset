@@ -5,10 +5,12 @@ Created on Sun Apr 24 2022
 @author: Debabrata Ghorai, Ph.D.
 
 Common functions for geospatial application.
+
 """
 
 import os
 import math
+import time
 import random
 import datetime
 import numpy as np
@@ -26,7 +28,7 @@ from fiona.crs import from_epsg
 from ensure import ensure_annotations
 # from typing import Any
 from logger import CustomException, logger
-from app import DEG_TO_KM
+from consts import DEG_TO_KM
 
 # Set GDAL/Geopandas Configuration
 gdal.SetConfigOption('SHAPE_RESTORE_SHX', 'YES')
@@ -651,4 +653,55 @@ def extend_line_shapefile(line_shapefile, extended_shapefile, max_snap_dist=None
         geometry=line_strings
         )
     gdf.to_file(extended_shapefile)
+    return
+
+
+def convert_to_shapefile(src_file="test.geojson", dest_file="test.shp"):
+    options = gdal.VectorTranslateOptions(
+        format="ESRI Shapefile",
+        accessMode="overwrite"
+    )
+    gdal.VectorTranslate(dest_file, src_file, options=options)
+    return dest_file
+
+
+def convert_to_geojson(src_file="test.shp", dest_file="test.geojson", dst_crs="EPSG:4326"):
+    options = gdal.VectorTranslateOptions(format="GeoJSON", dstSRS=dst_crs)
+    gdal.VectorTranslate(dest_file, src_file, options=options)
+    return dest_file
+
+
+def check_vector_file_format(filepath):
+    ds = ogr.Open(filepath)
+    if ds is None:
+        return "Unknown or Invalid Format"
+    
+    driver_name = ds.GetDriver().GetName()
+    
+    if driver_name == "ESRI Shapefile":
+        return "Shapefile"
+    elif driver_name == "GeoJSON":
+        return "GeoJSON"
+    else:
+        return f"Other Format: {driver_name}"
+    return
+
+
+def unlink_shapefiles(directory, file_stem):
+    extensions = ['.shp', '.shx', '.dbf', '.prj', '.sbn', '.sbx', '.cpg', '.shp.xml', '.qmd']
+    for ext in extensions:
+        # Join the directory and filename correctly
+        target = os.path.join(directory, f"{file_stem}{ext}")
+
+        # Use the os.path module to check existence
+        if os.path.exists(target):
+            for i in range(3): # try 3 times
+                try:
+                    os.remove(target)
+                    print(f"Deleted: {target}")
+                    return
+                except PermissionError:
+                    time.sleep(1) # wait a second
+            print(f"Could not delete {target} - still locked.")
+            
     return

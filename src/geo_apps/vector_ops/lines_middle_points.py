@@ -24,19 +24,23 @@ def generate_lines_middle_point(line_feature=None, out_mid_points=None):
     # sr.ExportToWkt()
     # Create new shapefile
     driver = ogr.GetDriverByName('ESRI Shapefile')
+    
     if os.path.exists(out_mid_points):
         try:
             driver.DeleteDataSource(out_mid_points)
         except:
             pass
+            
         flist = glob.glob(
             os.path.join(
                 os.path.dirname(out_mid_points),
                 os.path.basename(out_mid_points).split('.')[0]+'*'
             )
         )
+        
         for f in flist:
             os.remove(f)
+            
     # create ds
     ds = driver.CreateDataSource(out_mid_points)
     # Create new shapefile layer
@@ -48,16 +52,19 @@ def generate_lines_middle_point(line_feature=None, out_mid_points=None):
         feature = layer.GetFeature(i)
         geom = feature.GetGeometryRef()
         pnts = geom.GetPoints()
+        
         if not isinstance(pnts, type(None)):
             # calc segment dist
             lineDist = list()
             for p in range(len(pnts)-1):
                 lineDist.append(dist_calc(pnts[p], pnts[p+1]))
+                
             # get mid-length
             midLength = sum(lineDist)*0.5
             objects = [i+1]
             nodes = [pnts]
             points, _ = interval_point(objects, nodes, midLength)
+            
             # Point file generation
             point = ogr.Geometry(ogr.wkbPoint)
             point.SetPoint(0, points[0][0], points[0][1])
@@ -66,6 +73,7 @@ def generate_lines_middle_point(line_feature=None, out_mid_points=None):
             feat.SetGeometry(point)
             feat.SetFID(featIndex)
             lyr.CreateFeature(feat)
+            
     # Flush
     layer = None
     sr = None
@@ -74,4 +82,5 @@ def generate_lines_middle_point(line_feature=None, out_mid_points=None):
     driver = None
     lyrDef = None
     lyr = None
+    
     return

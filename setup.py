@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 5 19:26:11 2024
+
+@author: Debabrata Ghorai, Ph.D.
+
+This script used to configure, build, and distribute Python packages.
+
+"""
+
 from setuptools import setup, find_packages
 from typing import List
 

@@ -5,6 +5,7 @@ Created on Mon Mar 14 2016
 @author: Debabrata Ghorai, Ph.D.
 
 Convert raster to point shapefile.
+
 """
 
 from osgeo import gdal, gdalconst, gdalnumeric, ogr, osr
@@ -77,6 +78,7 @@ def raster_to_point(in_raster_data, out_point_file):
                 lyr.CreateFeature(feat)
     # Flush
     shapeData.Destroy()
+    
     return
 
 

@@ -5,6 +5,7 @@ Created on Mon Mar 14 2016
 @author: Debabrata Ghorai, Ph.D.
 
 Digital Number to Radiance Conversion.
+
 """
 
 import numpy
@@ -35,8 +36,8 @@ def dn_to_radiance(input_image, output_folder, lmax_list, lmin_list, qcal_min, q
         radresult.SetGeoTransform(geotransform)
         radresult.SetProjection(prj)
         # print ("Digital number to radiance conversion for band : %d" % i)
-        outdriver.CreateCopy(output_folder+"\\"+prefix +
-                             "_"+str(i)+".img", radresult)
+        outdriver.CreateCopy(f"{output_folder}/{prefix}_{i}.tif", radresult)
+    # flush
     outdriver = None
     ds = None
     return

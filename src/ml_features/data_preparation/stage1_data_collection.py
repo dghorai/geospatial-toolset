@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Data preparation for machine learning is the process of cleaning, transforming, and organizing 
 raw data into a format that machine learning algorithms can understand.
@@ -37,6 +38,7 @@ Step-by-step guide to data preparation:
 6) Data Reduction
     Finally, reduce the data's complexity without losing the information it can provide to the machine learning model, often using techniques like dimensionality reduction.
     - dimensionality reduction
+    - PCA
 
 7) Data Spliting
     The last step in preparing your data for machine learning is splitting it into different sets: training, validation, and test sets.
@@ -44,7 +46,8 @@ Step-by-step guide to data preparation:
 
 8) Data Augmentation
     This step is optional, but it can help to improve the model's performance by creating new examples from the existing data. This can include techniques such as rotating, flipping, or cropping images.
-    - Apply this on training data
+    - Apply this on training data.
+    - Keep test/unseen data as is.
     
 
 Reference:

@@ -2,7 +2,10 @@
 """
 Created on Mon Mar 25 18:41:31 2024
 
-@author: USER
+@author: Debabrata Ghorai, PhD.
+
+Run applications or tools on local system as per task ID.
+
 """
 
 import os

@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 12 19:26:11 2026
+
+@author: Debabrata Ghorai, Ph.D.
+
+Data transformation steps.
+
+"""
+
 # Build a voting selector
 import pandas as pd
 import warnings
@@ -7,8 +17,6 @@ from sklearn.preprocessing import LabelEncoder, OrdinalEncoder, StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
-
-# from src.logger import logger
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 pd.options.mode.chained_assignment = None  # default='warn'

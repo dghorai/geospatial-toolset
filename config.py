@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 5 19:26:11 2024
+
+@author: Debabrata Ghorai, Ph.D.
+
+Config Dataclass - Define variables settings.
+The main script can read and use these variables.
+
+"""
+
 import os
 
 from pathlib import Path

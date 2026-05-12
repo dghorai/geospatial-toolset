@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 5 19:26:11 2024
+
+@author: Debabrata Ghorai, Ph.D.
+
+Logger - Track events that occur while a program is running. 
+Define custom exception function.
+
+"""
+
 import os
 import sys
 import logging

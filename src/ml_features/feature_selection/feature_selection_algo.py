@@ -1,29 +1,28 @@
-# Build a voting selector
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 12 19:26:11 2026
+
+@author: Debabrata Ghorai, Ph.D.
+
+ML feature selection.
+Build a voting selector.
+
+"""
+
 import warnings
 import pandas as pd
 import numpy as np
 
 from logger import logger
-from sklearn.model_selection import train_test_split  # , GridSearchCV, KFold
-from sklearn.feature_selection import RFE, chi2, mutual_info_regression, mutual_info_classif, SelectFromModel  # , SelectKBest
-# , LinearRegression, LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.feature_selection import RFE, chi2, mutual_info_regression, mutual_info_classif, SelectFromModel
 from sklearn.linear_model import Lasso
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-# from sklearn.inspection import permutation_importance
-# , GradientBoostingClassifier, GradientBoostingRegressor
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import accuracy_score
-# from mlxtend.feature_selection import ExhaustiveFeatureSelector
-# from statsmodels.stats.outliers_influence import variance_inflation_factor
-# from statsmodels.tools.tools import add_constant
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
-# pd.reset_option('all')
-# warnings.filterwarnings("error")
-# pd.options.future.infer_string = True
 pd.options.mode.chained_assignment = None  # default='warn'
-
-# logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 
 
 class FeatureSelectorMethod:

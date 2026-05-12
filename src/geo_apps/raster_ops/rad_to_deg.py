@@ -4,16 +4,16 @@ Created on Mon Mar 14 2016
 
 @author: Debabrata Ghorai, Ph.D.
 
-Radiance to degree celsious conversion.
-
+Radiance to degree celsious conversion (temperature).
 GDAL raster drivers: https://gdal.org/drivers/raster/index.html
+
 """
 
 import numpy
 from osgeo import gdal, gdal_array
 
 
-def radiance2degree_celsious_temperature(thermal_band, output_folder, prefix="atmradi_band", gdal_rst_driver='GTiff'):
+def radiance_to_degree_celsious(thermal_band, output_folder, prefix="atmradi_band", gdal_rst_driver='GTiff'):
     # set output file projection from input file
     ds = gdal.Open(thermal_band)
     gt = ds.GetGeoTransform()
@@ -43,6 +43,6 @@ def radiance2degree_celsious_temperature(thermal_band, output_folder, prefix="at
         dcresult.SetGeoTransform(gt)
         dcresult.SetProjection(sr)
         # print("Temperature in degree Celsious for band : %d" % i)
-        out_driver.CreateCopy(output_folder+"\\"+prefix +
-                              "_"+str(b)+".img", dcresult)
+        out_driver.CreateCopy(f"{output_folder}/{prefix}_{b}.tif", dcresult)
+        
     return

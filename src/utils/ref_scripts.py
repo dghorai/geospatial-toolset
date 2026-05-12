@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Apr 24 2022
+
+@author: Debabrata Ghorai, Ph.D.
+
+Common functions for geospatial/ML application.
+This is an utility script where functions are obtained from various open-sources.
+Sometimes functions are rectified or updated to correct errors or improve performance.
+The references/links listed at the bottom of the script.
+
+"""
+
 import math
 import numpy as np
 import struct
@@ -7,7 +20,8 @@ from osgeo import ogr, gdal
 from pyproj import Proj
 from scipy.spatial import ConvexHull
 from scipy.linalg import solve
-from app import DEG_TO_KM
+from itertools import product
+from sklearn.metrics import mean_squared_error as MSE
 from src.utils.geo_utils import (
     dist_calc,
     flip_line,
@@ -16,11 +30,11 @@ from src.utils.geo_utils import (
     read_raster_as_array,
     get_shapefile_epsg_code
 )
-from itertools import product
-from sklearn.metrics import mean_squared_error as MSE
+from consts import DEG_TO_KM
 
 
 # [1]
+# ===============================
 def bbox_intersect(lyr1Ext, lyr2Ext):
     """
     Bounding Box intersection test.
@@ -48,6 +62,7 @@ def bbox_intersect(lyr1Ext, lyr2Ext):
 
 
 # [2]
+# =================================
 def intersect_point_to_line(point, line_start, line_end):
     """
     Find intersect point.
@@ -74,6 +89,7 @@ def intersect_point_to_line(point, line_start, line_end):
 
 
 # [3, 4]
+# ======================================
 def mid_point(p1, p2, l1, l2):
     iX = p1[0]+((p2[0]-p1[0])*(l1/l2))
     iY = p1[1]+((p2[1]-p1[1])*(l1/l2))
@@ -169,6 +185,7 @@ def fixed_interval_points(infc, interval, flipline=False, save=False, outfc=None
 
 
 # [5]
+# ==============================
 def line_intersection(line1, line2):
     """
     Return a (x, y) tuple or None if there is no intersection.
@@ -194,6 +211,7 @@ def line_intersection(line1, line2):
 
 
 # [6]
+# ==============================
 def ray_tracing_method(point, poly):
     """
     Checking if a point or node is inside a polygon.
@@ -216,6 +234,7 @@ def ray_tracing_method(point, poly):
 
 
 # [7]
+# ==========================
 def sort_counter_clockwise(points):
     """
     Sort a list of points in counter clockwise.
@@ -229,6 +248,7 @@ def sort_counter_clockwise(points):
 
 
 # [8]
+# ===========================
 def latlon_to_utm(lon, lat):
     """
     Convert lat/long to UTM unit.
@@ -247,6 +267,7 @@ def latlon_to_utm(lon, lat):
 
 
 # [9]
+# ===============================
 def minimum_bounding_rectangle(points):
     """
     Find the minimum area rectangle.
@@ -290,6 +311,7 @@ def minimum_bounding_rectangle(points):
 
 
 # [10]
+# =================================
 def polygon_area(coords):
     """
     Calculate area of polygon given list of coordinates. Assuming coords are in UTM unit.
@@ -308,6 +330,7 @@ def polygon_area(coords):
 
 
 # [11]
+# =============================
 def world2Pixel(geoMatrix, x, y):
     ulX = geoMatrix[0]
     ulY = geoMatrix[3]
@@ -318,6 +341,7 @@ def world2Pixel(geoMatrix, x, y):
 
 
 # [12]
+# ========================
 def extract_pixel_value(imgfile, point_list):
     """
     Extract pixel value at given point.
@@ -348,6 +372,7 @@ def extract_pixel_value(imgfile, point_list):
 
 
 # [13]
+# =================================
 def find_wgs2utm_epsg_code(lon: float, lat: float):
     """Based on lat and lng, return best utm epsg-code"""
     utm_band = str((math.floor((lon + 180) / 6) % 60) + 1)
@@ -361,6 +386,7 @@ def find_wgs2utm_epsg_code(lon: float, lat: float):
 
 
 # [14]
+# ======================================
 # spatial interpolation algo
 def euclidean_dist(x1,x2,y1,y2):
     return ((x1-x2)**2+(y1-y2)**2)**0.5
@@ -488,6 +514,7 @@ def ordinary_kriging(df, yy, xx, z_field=None):
 # [13] https://gis.stackexchange.com/questions/269518/auto-select-suitable-utm-zone-based-on-grid-intersection
 # [14] https://github.com/alexxxroz/Medium/blob/main/SpatialInterpolation.ipynb
 
+# Random
 # https://gis.stackexchange.com/questions/392515/create-a-shapefile-from-geometry-with-ogr
 # https://www.gis.usu.edu/~chrisg/python/2009/lectures/ospy_slides2.pdf
 # http://osgeo-org.1560.x6.nabble.com/satellite-image-processing-in-Python-td3753422.html

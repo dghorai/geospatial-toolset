@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Apr 24 2022
+
+@author: Debabrata Ghorai, Ph.D.
+
+Common functions for ML application.
+
+"""
+
 import os
 import sys
 import pickle

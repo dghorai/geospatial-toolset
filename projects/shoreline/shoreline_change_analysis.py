@@ -12,17 +12,18 @@
                   Available at: https://www.tandfonline.com/doi/abs/10.1080/10106049.2020.1815868
 * Revesions:      N/A
 ****************************************************************************
+
+This project only handle shapefile.
+
 """
 
 
 import os
 
 from src.utils.geo_utils import unlink_files
-from projects.shoreline.generate_shoreline_transects import create_shoreline_transects
-from projects.shoreline.generate_transects_seqid import yield_transects_seqid
-from projects.shoreline.generate_shoreline_baseline_intersects import create_changerate_analysis_points
-from projects.shoreline.calc_shoreline_dist_from_baseline import measure_historical_shoreline_distance
-from projects.shoreline.calc_shoreline_changerate import generate_shoreline_chargerate_values
+from projects.shoreline.shoreline_baseline_intersects import create_changerate_analysis_points
+from projects.shoreline.shoreline_dist_from_baseline import measure_historical_shoreline_distance
+from projects.shoreline.shoreline_change_rate import generate_shoreline_chargerate_values
 
 
 class ShorelineChangeAnalysis:
@@ -39,7 +40,12 @@ class ShorelineChangeAnalysis:
         SeqID: Value of SequenceID
     """
 
-    def __init__(self, tmp, offshoreline, baseline, shorelines_path, transects, out_csvfile, interval=100, date_sep='-', date_format='yyyy-mm-dd'):
+    def __init__(self, tmp, offshoreline, baseline,
+                shorelines_path, transects, out_csvfile, 
+                interval=100, 
+                date_sep='-', 
+                date_format='yyyy-mm-dd'
+        ):
         self.temp_dir = tmp
         self.baseline = baseline
         self.offshoreline = offshoreline
@@ -54,21 +60,6 @@ class ShorelineChangeAnalysis:
         self.date_format = date_format
 
     def run(self):
-        # generate transects
-        # create_shoreline_transects(
-        #     onshore_line=self.baseline,
-        #     offshore_line=self.offshoreline,
-        #     out_transect_line=self.transects,
-        #     x_interval=self.x_interval
-        # )
-        # add sequence id
-        # yield_transects_seqid(
-        #     self.temp_dir, 
-        #     self.baseline, 
-        #     self.transects, 
-        #     self.transects_with_seqid,
-        #     col_name='SeqID'
-        # )
         # generate intersects points for shorelines and baseline
         create_changerate_analysis_points(
             self.temp_dir, 

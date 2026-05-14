@@ -5,6 +5,7 @@ Created on Mon Mar 25 21:29:13 2024
 @author: Debabrata Ghorai, Ph.D.
 
 Generate sequence ID of shoreline transects.
+This project only handle shapefile.
 
 """
 
@@ -35,7 +36,6 @@ def create_line_seqid(line_feature, out_line_feature):
     driver = ogr.GetDriverByName('ESRI Shapefile')
     if os.path.exists(out_line_feature):
         driver.DeleteDataSource(out_line_feature)
-
     # create data source
     ds = driver.CreateDataSource(out_line_feature)
     # Create new shapefile layer
@@ -65,7 +65,11 @@ def create_line_seqid(line_feature, out_line_feature):
     return
 
 
-def yield_transects_seqid(temp_dir, baseline, transects_lines, out_transects_with_seqid, col_name=None):
+def yield_transects_seqid(
+        temp_dir, baseline, transects_lines, 
+        out_transects_with_seqid, 
+        col_name=None
+):
     """Generate sequence ID of shoreline transects"""
     # define temporary files
     out_transects = Path(transects_lines)
@@ -74,7 +78,7 @@ def yield_transects_seqid(temp_dir, baseline, transects_lines, out_transects_wit
     out_union_line_selected = Path(os.path.join(temp_dir, 'tests', 'results', 'union_xline_selected.shp'))
     out_seqid_xpoints = Path(os.path.join(temp_dir, 'tests', 'results', 'xpoints_seqid.shp'))
 
-    # check exist or not
+    # check file exists or not
     out_transects.parent.mkdir(parents=True, exist_ok=True)
     out_union_line.parent.mkdir(parents=True, exist_ok=True)
     out_mid_points.parent.mkdir(parents=True, exist_ok=True)
@@ -101,28 +105,45 @@ def yield_transects_seqid(temp_dir, baseline, transects_lines, out_transects_wit
         points.append(geom[-1])
 
     gdf_segments = split_lines_at_points(
-        baseline, points, snap_dist=10, src_epsg_code=src_epsg_code)
+        baseline, points, 
+        snap_dist=10, 
+        src_epsg_code=src_epsg_code
+    )
     gdf2 = gpd.read_file(out_transects)
 
     # union line layers
     res_union = gpd.overlay(
-        gdf_segments, gdf2, how='union', keep_geom_type=True)
+        gdf_segments, gdf2, 
+        how='union', 
+        keep_geom_type=True
+    )
     res_union.to_file(out_union_line)
 
     # create mid-point of lines
     generate_lines_middle_point(
-        line_feature=out_union_line, out_mid_points=out_mid_points)
+        line_feature=out_union_line, 
+        out_mid_points=out_mid_points
+    )
 
     # Create 1 meter buffer for Baseline
     baseline_buffer = buffer_feature(
-        baseline, buffer_offset=1.0, src_epsg_code=src_epsg_code)
+        baseline, 
+        buffer_offset=1.0, 
+        src_epsg_code=src_epsg_code
+    )
     baseline_buffer_gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(baseline_buffer))
     # Select points based on the Buffer Baseline Polygon
     point_in_poly = select_by_location(
-        select_feature_from=out_mid_points, feature_overlap_with=baseline_buffer_gdf, overlap_method='within')
+        select_feature_from=out_mid_points, 
+        feature_overlap_with=baseline_buffer_gdf, 
+        overlap_method='within'
+    )
     # Create 1 meter buffer for selected point file
     spoints_buffer = buffer_feature(
-        point_in_poly, buffer_offset=1.0, src_epsg_code=src_epsg_code)
+        point_in_poly, 
+        buffer_offset=1.0, 
+        src_epsg_code=src_epsg_code
+    )
     spoints_buffer_gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(spoints_buffer))
 
     # Select Base-Trans-Splited files based on selected points file polygon
@@ -139,7 +160,10 @@ def yield_transects_seqid(temp_dir, baseline, transects_lines, out_transects_wit
 
     # k) Create 1 meter buffer on the (j) created point file
     seqid_point_buffer = buffer_feature(
-        out_seqid_xpoints, buffer_offset=1.0, src_epsg_code=src_epsg_code)
+        out_seqid_xpoints, 
+        buffer_offset=1.0, 
+        src_epsg_code=src_epsg_code
+    )
     seqid_point_buffer_gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(seqid_point_buffer))
 
     # l) Spatial join between transects and (k) feature class

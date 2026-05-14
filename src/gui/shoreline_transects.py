@@ -13,7 +13,7 @@ import streamlit as st
 import tempfile
 
 from src.gui.dialog import set_new_shapefile_path
-from projects.shoreline.generate_shoreline_transects import create_shoreline_transects
+from projects.shoreline.shoreline_transects import create_shoreline_transects
 from src.utils.progress_bar import update_bar
 
 
